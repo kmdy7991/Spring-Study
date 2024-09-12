@@ -1,35 +1,30 @@
 package intro.spring.service;
 
 import intro.spring.domain.Member;
-import intro.spring.repository.MemoryMemberRepository;
+import intro.spring.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Optional;
 
-class MemberServiceTest {
+@SpringBootTest
+@Transactional
+class MemberServiceIntergrationTest {
 
+    @Autowired
     MemberService memberService;
-    MemoryMemberRepository memoryMemberRepository;
+    @Autowired
+    MemberRepository memberRepository;
 
-    @BeforeEach
-    public void beforeEach() {
-        memoryMemberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memoryMemberRepository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memoryMemberRepository.clearMembers();
-    }
 
     @Test
     void join() {
         // given
         Member member = new Member();
-        member.setName("hello");
+        member.setName("hello4");
         // when
         Long saveId = memberService.join(member);
 
@@ -41,16 +36,20 @@ class MemberServiceTest {
     @Test
     void findMembers() {
         Member member1 = new Member();
-        member1.setName("spring1");
+        member1.setName("spring2");
 
         Member member2 = new Member();
-        member2.setName("spring1");
+        member2.setName("spring2");
 
         memberService.join(member1);
         org.junit.jupiter.api.Assertions.assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+
     }
 
-//    @Test
-//    void findOne() {
-//    }
+    @Test
+    void findOne() {
+        Member member = memberService.findOne(1L).get();
+
+        Assertions.assertThat(member.getName()).isNotNull();
+    }
 }
