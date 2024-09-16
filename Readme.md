@@ -77,3 +77,30 @@ Interface가 명확해지며, 대체 가능성이 높아진다.
 구현체에 의존하면 변경이 어려워 진다.
 
 ### 다형성만으로 OCP와 DIP를 지킬 수 없음 -> Spring Container와 DI
+
+### Spring
+
+#### Bean Factory
+
+-   스프링 컨테이너의 최상위 인터페이스
+-   스프링 빈을 관리하고 조회하는 역할
+-   getBean() method 제공
+
+#### ApplicationContext
+
+-   BeanFactory 기능을 모두 상속받아서 제공
+-   추가적인 부가기능을 제공(메세지 소스를 활용한 국제화, 환경변수, 애플리케이션 이벤트, 편리한 리소스 조회)
+
+#### 다양한 설정 형식 지원 - Java Code, XML
+
+-   Annotation 기반 Java code 설정
+
+-   XML 설정 사용
+    <br>
+    XML 사용 시 컴파일 없이 빈 설정 정보를 변경할 수 있다.
+    GenericXmlApplicationContext에 xml 설정 파일을 제공
+
+#### BeanDefinition
+
+-   BeanDefinition이라는 추상화를 통해 다양한 설정 정보를 제공
+-   BeanDefinition을 빈 설정 메타 정보라 한다.
