@@ -3,10 +3,8 @@ package basic.spring;
 import basic.spring.member.Grade;
 import basic.spring.member.Member;
 import basic.spring.member.MemberService;
-import basic.spring.member.MemberServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MemberApp {
     public static void main(String[] args) {
